@@ -1,8 +1,8 @@
 .signup-container {
   display: flex;
-  justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100%;
   background-color: #f5f5f5;
 }
 
@@ -14,7 +14,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 50px;
+}
+
+.signup-left img {
+  width: 100%;
+  height: 80%;
+  object-fit: cover;
 }
 
 .signup-left h1 {
@@ -28,9 +33,8 @@
 
 .signup-right {
   flex: 1;
-  margin-top: 160px;
   background-color: white;
-  padding: 50px;
+  padding: 55px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -40,6 +44,7 @@
 .signup-right form {
   width: 100%;
   max-width: 400px;
+  margin-bottom: 10px;
 }
 
 .signup-right h2 {
@@ -55,15 +60,15 @@
 .signup-right input {
   width: 100%;
   padding: 10px;
-  margin: 10px 0;
+  margin: 3px 0;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .signup-right button {
   width: 100%;
   padding: 10px;
-  margin: 10px 0;
+  margin: 5px 0;
   background-color: #007bff;
   color: white;
   border: none;
@@ -71,7 +76,17 @@
   cursor: pointer;
 }
 
+.authentic {
+  display: flex;
+  margin: 10px 0px 30px 0px;
+}
 
+.authentic input {
+  width: 20px;
+  height: 20px;
+  margin-top: 0px;
+  margin-right: 10px;
+}
 
 .signup-right button:hover {
   background-color: #0056b3;
@@ -79,15 +94,21 @@
 
 .signup-right .social-signup {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 10px;
+  width: 400px;
 }
 .social-signup {
   display: flex;
   justify-content: space-between;
 }
+
+.social-signup button {
+  width: 190px;
+}
+
 .google-btn,
 .facebook-btn {
-  width: 30%;
+  width: 10px;
   padding: 10px;
   margin: 10px;
   border: none;
@@ -96,12 +117,12 @@
 }
 
 .google-btn {
-  background-color: #dd4b39;
+  background-color: #f2a095;
   color: white;
 }
 
 .facebook-btn {
-  background-color: #3b5998;
+  background-color: #a0b3dc;
   color: white;
 }
 
@@ -111,4 +132,10 @@
 
 .facebook-btn:hover {
   background-color: #2d4373;
+}
+
+.alertError {
+  color: red;
+  font-size: 12px;
+  height: 15px;
 }
