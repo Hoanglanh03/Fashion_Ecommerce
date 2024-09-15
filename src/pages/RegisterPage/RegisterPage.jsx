@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./RegisterPage.css";
 import toast from "react-hot-toast";
 import img_1 from "../../asserts/images/ads.png";
+import axios from "axios";
 
 const RegisterPage = () => {
+  const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -12,8 +16,6 @@ const RegisterPage = () => {
     confirmPassword: "",
   });
 
-  const [errors, setErrors] = useState({});
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -21,37 +23,9 @@ const RegisterPage = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
-
-    if (!formData.firstName.trim()) {
-      newErrors.firstName = "* Firstname is required";
-    } else {
-      newErrors.firstName = "";
-    }
-
-    if (!formData.lastName.trim()) {
-      newErrors.lastName = "* Lastname is required";
-    } else {
-      newErrors.lastName = "";
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = "* Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "* Email is invalid";
-    } else {
-      newErrors.email = "";
-    }
-
-    if (!formData.password) {
-      newErrors.password = "* Password is required";
-    } else if (formData.password.length < 8) {
-      newErrors.password = "* Password must be at least 8 characters";
-    } else {
-      newErrors.password = "";
-    }
 
     if (formData.confirmPassword !== formData.password) {
       newErrors.confirmPassword = "* Passwords do not match";
@@ -60,15 +34,38 @@ const RegisterPage = () => {
     }
 
     setErrors(newErrors);
-    if (Object.keys(newErrors).length === 0) {
-      console.log("Form data:", formData);
-      toast.success("Form submitted successfully!");
-    } else {
-      toast.error("Please correct the errors in the form!");
-    }
+    if (newErrors?.confirmPassword?.length === 0) {
+      try {
+        const addDataUser = {
+          email: formData.email,
+          username: formData.username,
+          password: formData.password,
+          name: {
+            firstname: formData.firstname,
+            lastname: formData.lastname,
+          },
+        };
 
-    toast.success("Successfully toasted!");
-    console.log(formData);
+        const response = await axios.post(
+          "https://fakestoreapi.com/users",
+          addDataUser
+        );
+
+        console.log(response);
+
+        if (response.status === 200) {
+          toast.success("Created user successfully");
+          navigate("/");
+        } else {
+          toast.error("Created user Unsuccessfully!");
+        }
+      } catch (error) {
+        console.error("There was an error making the request!", error);
+        toast.error("Failed to create user");
+      }
+    } else {
+      toast.error("Please fill out all required fields.");
+    }
   };
 
   return (
@@ -92,9 +89,8 @@ const RegisterPage = () => {
                 placeholder="First name"
                 value={formData.firstName}
                 onChange={handleChange}
-                autoComplete="off"
+                required
               />
-              <p className="alertError">{errors.firstName}</p>
             </div>
             <div>
               <input
@@ -103,9 +99,8 @@ const RegisterPage = () => {
                 placeholder="Last name"
                 value={formData.lastName}
                 onChange={handleChange}
-                autoComplete="off"
+                required
               />
-              <p className="alertError">{errors.lastName}</p>
             </div>
           </div>
           <div>
@@ -115,9 +110,8 @@ const RegisterPage = () => {
               placeholder="Email"
               value={formData.email}
               onChange={handleChange}
-              autoComplete="off"
+              required
             />
-            <p className="alertError">{errors.email}</p>
           </div>
           <div>
             <input
@@ -127,9 +121,8 @@ const RegisterPage = () => {
               value={formData.password}
               onChange={handleChange}
               minLength="8"
-              autoComplete="off"
+              required
             />
-            <p className="alertError">{errors.password}</p>
           </div>
           <div>
             <input
@@ -138,7 +131,7 @@ const RegisterPage = () => {
               placeholder="Confirm password"
               value={formData.confirmPassword}
               onChange={handleChange}
-              autoComplete="off"
+              required
             />
             <p className="alertError">{errors.confirmPassword}</p>
           </div>
