@@ -7,49 +7,66 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import ProductPage from "./pages/ProductPage/ProductPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import ShopPage from "./pages/ShopPage/ShopPage";
-import "./App.css";
+import { Toaster } from "react-hot-toast";
+import AuthenticationLayout from "./layout/AuthenLayout";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
       element: <HomePage />,
-      errorElement: <ErrorNotFound />
+      errorElement: <ErrorNotFound />,
     },
-    {
+    { 
       path: "/cart",
       element: <CartPage />,
-      errorElement: <ErrorNotFound />
+      errorElement: <ErrorNotFound />,
     },
-    {
+   {
       path: "/login",
       element: <LoginPage />,
-      errorElement: <ErrorNotFound />
+      errorElement: <ErrorNotFound />,
     },
     {
       path: "/product",
       element: <ProductPage />,
-      errorElement: <ErrorNotFound />
+      errorElement: <ErrorNotFound />,
     },
     {
       path: "/shop",
       element: <ShopPage />,
-      errorElement: <ErrorNotFound />
+      errorElement: <ErrorNotFound />,
     },
     {
       path: "/register",
       element: <RegisterPage />,
-      errorElement: <ErrorNotFound />
+      errorElement: <ErrorNotFound />,
     },
     {
       path: "/checkout",
       element: <CheckoutPage />,
-      errorElement: <ErrorNotFound />
+      errorElement: <ErrorNotFound />,
+    },
+    {
+      element: <AuthenticationLayout />,
+      children: [
+        {
+          path: "/register",
+          element: <RegisterPage />,
+          errorElement: <ErrorNotFound />,
+        },
+        {
+          path: "/login",
+          element: <LoginPage />,
+          errorElement: <ErrorNotFound />,
+        },
+      ]
     }
   ]);
 
   return (
     <div>
+      <Toaster />
       <RouterProvider router={router} />
     </div>
   );
