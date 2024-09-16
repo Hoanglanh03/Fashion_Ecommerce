@@ -8,7 +8,6 @@ import ProductPage from "./pages/ProductPage/ProductPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import ShopPage from "./pages/ShopPage/ShopPage";
 import { Toaster } from "react-hot-toast";
-import AuthenticationLayout from "./layout/AuthenLayout";
 
 function App() {
   const router = createBrowserRouter([
@@ -17,12 +16,12 @@ function App() {
       element: <HomePage />,
       errorElement: <ErrorNotFound />,
     },
-    { 
+    {
       path: "/cart",
       element: <CartPage />,
       errorElement: <ErrorNotFound />,
     },
-   {
+    {
       path: "/login",
       element: <LoginPage />,
       errorElement: <ErrorNotFound />,
@@ -47,21 +46,6 @@ function App() {
       element: <CheckoutPage />,
       errorElement: <ErrorNotFound />,
     },
-    {
-      element: <AuthenticationLayout />,
-      children: [
-        {
-          path: "/register",
-          element: <RegisterPage />,
-          errorElement: <ErrorNotFound />,
-        },
-        {
-          path: "/login",
-          element: <LoginPage />,
-          errorElement: <ErrorNotFound />,
-        },
-      ]
-    }
   ]);
 
   return (
