@@ -7,7 +7,8 @@
 }
 
 .signup-left {
-  flex: 1;
+  width: 50%;
+  height: 100%;
   background-color: #252526;
   color: white;
   display: flex;
@@ -32,9 +33,9 @@
 }
 
 .signup-right {
-  flex: 1;
+  height: 100vh;
+  width: 50%;
   background-color: white;
-  padding: 55px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -48,7 +49,7 @@
 }
 
 .signup-right h2 {
-  font-size: 24px;
+  font-size: 32px;
   margin-bottom: 20px;
 }
 
@@ -138,4 +139,81 @@
   color: red;
   font-size: 12px;
   height: 15px;
+}
+
+.login {
+  margin-top: 15px;
+}
+
+.login a {
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .signup-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .signup-left,
+  .signup-right {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .signup-left {
+    display: none;
+  }
+
+  .signup-right {
+    width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .signup-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .signup-left,
+  .signup-right {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .signup-left {
+    display: none;
+  }
+
+  .signup-right {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .signup-right {
+    padding: 1rem;
+  }
+
+  .title-register {
+    font-size: 20px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  button[type="submit"] {
+    padding: 10px;
+  }
+
+  .social-signup {
+    flex-direction: column;
+  }
+
+  .google-btn,
+  .facebook-btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 }

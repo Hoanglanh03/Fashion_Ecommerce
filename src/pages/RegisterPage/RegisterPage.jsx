@@ -79,10 +79,9 @@ const RegisterPage = () => {
 
       <div className="signup-right">
         <form onSubmit={handleSubmit}>
-          <h2>Sign Up for an Account</h2>
+          <h2 className="title-register">Sign up for an account</h2>
           <div className="name-fields">
             <div>
-              <i class="fa fa-user" aria-hidden="true"></i>
               <input
                 type="text"
                 name="firstName"
@@ -148,11 +147,15 @@ const RegisterPage = () => {
         </form>
         <p>Or sign up with</p>
         <div className="social-signup">
-          <button className="google-btn">Google</button>
-          <button className="facebook-btn">Facebook</button>
+          <button className="google-btn">
+            <i class="fa-brands fa-google"></i> Google
+          </button>
+          <button className="facebook-btn">
+            <i class="fa-brands fa-facebook"></i> Facebook
+          </button>
         </div>
-        <p>
-          Already have an account? <a href="/login">Log In</a>
+        <p className="login">
+          Already have an account? <a href="/login" >Log In</a>
         </p>
       </div>
     </div>
