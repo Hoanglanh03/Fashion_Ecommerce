@@ -170,27 +170,6 @@
   }
 }
 
-@media (max-width: 768px) {
-  .signup-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .signup-left,
-  .signup-right {
-    width: 100%;
-    padding: 1rem;
-  }
-
-  .signup-left {
-    display: none;
-  }
-
-  .signup-right {
-    width: 90%;
-  }
-}
-
 @media (max-width: 480px) {
   .signup-right {
     padding: 1rem;
@@ -209,11 +188,20 @@
 
   .social-signup {
     flex-direction: column;
+    align-items: center;
   }
 
   .google-btn,
   .facebook-btn {
-    width: 100%;
+    width: 80%;
     margin-bottom: 10px;
+  }
+
+  .signup-right .name-fields {
+    flex-direction: column;
+  }
+
+  .signup-right .name-fields div {
+    width: 100%;
   }
 }
