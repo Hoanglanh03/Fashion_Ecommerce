@@ -52,7 +52,7 @@ const LoginPage = () => {
 
         if (response.status === 200) {
           toast.success("Login successfully");
-          navigate("/"); 
+          navigate("/");
         } else {
           toast.error("Login Unsuccessful!");
         }
@@ -66,54 +66,53 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="signup-container">
-      <div className="signup-left">
+    <div className="login-container">
+      <div className="login-left">
         <h1>Fashion</h1>
-        <div className="image-placeholder">
-          <img src={img_1} alt="ads" />
-        </div>
+        <img className="image-placeholder" src={img_1} alt="ads" />
       </div>
 
-      <div className="signup-right">
-        <form onSubmit={handleSubmit}>
-          <h2 className="title-login">Sign in for an account</h2>
-          <div>
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-            {errors.email && <p className="error-message">{errors.email}</p>}
-          </div>
-          <div>
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-              minLength="2"
-              required
-            />
-            {errors.password && (
-              <p className="error-message">{errors.password}</p>
-            )}
-          </div>
-          <a href="/terms" >Forget Password?</a>
+      <div className="login-right">
+        <form className="login-form" onSubmit={handleSubmit}>
+          <h1 className="title-login">Sign in for an account</h1>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          {errors.email && <p className="error-message">{errors.email}</p>}
+
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            minLength="2"
+            required
+          />
+          {errors.password && (
+            <p className="error-message">{errors.password}</p>
+          )}
+          <a href="/terms">Forget Password?</a>
+
           <button type="submit">Sign In</button>
         </form>
+
         <p>Or sign up with</p>
-        <div className="social-signup">
-          <button className="google-btn">
+
+        <div className="social-login">
+          <button className="login-google-btn">
             <i className="fa-brands fa-google"></i> Google
           </button>
-          <button className="facebook-btn">
+          <button className="login-facebook-btn">
             <i className="fa-brands fa-facebook"></i> Facebook
           </button>
         </div>
+
         <p className="login">
           Don't have an account? <a href="/register">Register</a>
         </p>
