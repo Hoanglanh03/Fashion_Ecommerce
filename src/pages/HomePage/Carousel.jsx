@@ -7,12 +7,22 @@ const CardSlider = () => {
   const [selectedType, setSelectedType] = useState("men's clothing");
   const [currentPage, setCurrentPage] = useState(0);
   const [data, setData] = useState([]);
+  const [itemsPerPage, setItemsPerPage] = useState(4); 
 
-  const itemsPerPage = 4;
   const filteredProducts = data.filter(
     (card) => card.category === selectedType
   );
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+
+  const updateItemsPerPage = () => {
+    if (window.innerWidth < 640) {
+      setItemsPerPage(1); 
+    } else if (window.innerWidth < 1024) {
+      setItemsPerPage(2); 
+    } else {
+      setItemsPerPage(4); 
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,6 +41,11 @@ const CardSlider = () => {
       }
     };
     fetchData();
+
+    updateItemsPerPage();
+    window.addEventListener("resize", updateItemsPerPage);
+
+    return () => window.removeEventListener("resize", updateItemsPerPage);
   }, []);
 
   return (
@@ -54,6 +69,7 @@ const CardSlider = () => {
           )
         )}
       </div>
+      
       <div className="container flex justify-between mt-2 mb-1">
         {filteredProducts
           .slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage)
