@@ -8,7 +8,6 @@ const Advertisement = () => {
   return (
     <div className="container mx-auto py-12">
       <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-4 h-auto md:h-[500px]">
-        {/* First Item */}
         <div className="relative group flex w-full h-auto md:h-full">
           <img
             src={GirlAdv}
@@ -24,7 +23,6 @@ const Advertisement = () => {
           </div>
         </div>
 
-        {/* Second Item */}
         <div className="relative group w-full h-auto md:h-full md:col-start-1 md:row-start-2">
           <img
             src={Jewelry}
@@ -40,7 +38,6 @@ const Advertisement = () => {
           </div>
         </div>
 
-        {/* Third Item */}
         <div className="relative group w-full h-auto md:h-full md:row-span-2 md:col-start-2 md:row-start-1">
           <img
             src={Boy}
