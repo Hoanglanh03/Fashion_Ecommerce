@@ -1,8 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import GirlAdv from "../../asserts/images/woman.webp";
 import Jewelry from "../../asserts/images/jewelry.webp";
 import Boy from "../../asserts/images/boy.webp";
-import { Link } from "react-router-dom";
 
 const Advertisement = () => {
   return (
@@ -17,7 +17,7 @@ const Advertisement = () => {
           <div className="absolute inset-0 bg-white bg-opacity-50 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-500 ease-in-out">
             <h2 className="text-lg font-semibold ">NEW DESIGN</h2>
             <p className="text-sm">SEND HER YOUR LOVE</p>
-            <Link to="/" className="mt-2 text-sm underline">
+            <Link to="/shop" className="mt-2 text-sm underline">
               Get it now
             </Link>
           </div>
@@ -32,7 +32,7 @@ const Advertisement = () => {
           <div className="absolute inset-0 bg-white bg-opacity-50 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-500 ease-in-out">
             <h2 className="text-lg font-semibold">NEW DESIGN</h2>
             <p className="text-sm">SEND HER YOUR LOVE</p>
-            <Link to="/" className="mt-2 text-sm underline">
+            <Link to="/shop" className="mt-2 text-sm underline">
               Get it now
             </Link>
           </div>
@@ -47,7 +47,7 @@ const Advertisement = () => {
           <div className="absolute inset-0 bg-white bg-opacity-50 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-500 ease-in-out">
             <h2 className="text-lg font-semibold">MEN'S FASHION</h2>
             <p className="text-sm">MID SEASON SALE</p>
-            <Link to="/" className="mt-2 text-sm underline">
+            <Link to="/shop" className="mt-2 text-sm underline">
               View Collection
             </Link>
           </div>
