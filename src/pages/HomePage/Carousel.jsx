@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Card from "../../components/Card";
 import axios from "axios";
+import toast from "react-hot-toast";
 
-const CardSlider = () => {
+const Carousel = () => {
   const [selectedType, setSelectedType] = useState("men's clothing");
   const [currentPage, setCurrentPage] = useState(0);
   const [data, setData] = useState([]);
-  const [itemsPerPage, setItemsPerPage] = useState(4); 
+  const [itemsPerPage, setItemsPerPage] = useState(4);
 
   const filteredProducts = data.filter(
     (card) => card.category === selectedType
@@ -16,32 +17,30 @@ const CardSlider = () => {
 
   const updateItemsPerPage = () => {
     if (window.innerWidth < 640) {
-      setItemsPerPage(1); 
+      setItemsPerPage(1);
     } else if (window.innerWidth < 1024) {
-      setItemsPerPage(2); 
+      setItemsPerPage(2);
     } else {
-      setItemsPerPage(4); 
+      setItemsPerPage(4);
     }
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://fakestoreapi.com/products");
-        if (response.ok) {
-          const result = await response.json();
-          console.log("Data fetched successfully:", result);
-          setData(result);
+        const response = await axios.get("https://fakestoreapi.com/products");
+        if (response.status === 200) {
+          setData(response.data);
         } else {
-          console.error("Failed to fetch data. Status:", response.status);
+          toast.error("not contact with API");
         }
       } catch (error) {
         console.error("Error occurred while fetching data:", error);
         alert("Error:", error);
       }
     };
-    fetchData();
 
+    fetchData();
     updateItemsPerPage();
     window.addEventListener("resize", updateItemsPerPage);
 
@@ -69,7 +68,7 @@ const CardSlider = () => {
           )
         )}
       </div>
-      
+
       <div className="container flex justify-between mt-2 mb-1">
         {filteredProducts
           .slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage)
@@ -103,4 +102,4 @@ const CardSlider = () => {
   );
 };
 
-export default CardSlider;
+export default Carousel;
