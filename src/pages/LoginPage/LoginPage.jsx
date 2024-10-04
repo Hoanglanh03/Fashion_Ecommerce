@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./LoginPage.css";
+import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import img_1 from "../../asserts/images/ads.png";
 import axios from "axios";
@@ -45,16 +45,20 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-left">
-        <h1>Fashion</h1>
-        <img className="image-placeholder" src={img_1} alt="ads" />
+    <div className="w-full flex h-screen bg-neutral-300 px-[10%] py-5">
+      <div className=" hidden md:flex w-full h-full flex-col items-center bg-[#252526] text-white md:px-0 py-[30px] md:rounded-tl-[3%] md:rounded-bl-[3%] login-left">
+        <h1 className="text-2xl font-bold">Fashion</h1>
+        <img className="w-[70%]" src={img_1} alt="ads" />
       </div>
 
-      <div className="login-right">
-        <form className="login-form" onSubmit={handleSubmit}>
-          <h1 className="title-login">Sign in for an account</h1>
+      <div className="w-full flex flex-col items-center justify-center gap-5 bg-white md:rounded-tr-[3%] md:rounded-br-[3%] login-right">
+        <form
+          className="w-4/5 flex flex-col gap-[15px]"
+          onSubmit={handleSubmit}
+        >
+          <h1 className="text-center">Sign in for an account</h1>
           <input
+            className="w-full border mx-0 my-1.5 p-2.5 rounded-[10px] border-solid border-[#ccc]"
             type="email"
             name="email"
             placeholder="Email"
@@ -63,32 +67,43 @@ const LoginPage = () => {
             required
           />
           <input
+            className="w-full border mx-0 my-1.5 p-2.5 rounded-[10px] border-solid border-[#ccc]"
             type="password"
             name="password"
             placeholder="Password"
             value={formData.password}
             onChange={handleChange}
-            minLength="2"
+            minLength="5"
             required
           />
 
-          <a href="/terms">Forget Password?</a>
-          <button type="submit">Sign In</button>
+          <Link to="/terms" className="no-underline">
+            Forget Password?
+          </Link>
+          <button
+            type="submit"
+            className="w-full text-[15px] font-semibold bg-[#1078e8] text-[white] cursor-pointer mx-0 my-[5px] p-2.5 rounded-[5px] border-[none]"
+          >
+            Sign In
+          </button>
         </form>
 
         <p>Or sign up with</p>
 
-        <div className="social-login">
-          <button className="login-google-btn">
+        <div className="w-4/5 flex justify-between gap-[15px]">
+          <button className="w-full text-[15px] font-semibold bg-[#a0b3dc] hover:bg-[#2d4373] text-[white] cursor-pointer mx-0 my-[5px] p-2.5 rounded-[5px] border-[none]">
             <i className="fa-brands fa-google"></i> Google
           </button>
-          <button className="login-facebook-btn">
+          <button className="w-full text-[15px] font-semibold bg-[#f2a095] hover:bg-[#c23321] text-[white] cursor-pointer mx-0 my-[5px] p-2.5 rounded-[5px] border-[none]">
             <i className="fa-brands fa-facebook"></i> Facebook
           </button>
         </div>
 
         <p className="login">
-          Don't have an account? <a href="/register">Register</a>
+          Don't have an account?{" "}
+          <Link to="/register" className="font-[bold] text-[blue]">
+            Register
+          </Link>
         </p>
       </div>
     </div>
