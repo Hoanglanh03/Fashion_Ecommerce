@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import HomePage from "./pages/HomePage/HomePage";
 import CartPage from "./pages/CartPage/CartPage";
 import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
@@ -7,7 +8,6 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import ProductPage from "./pages/ProductPage/ProductPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import ShopPage from "./pages/ShopPage/ShopPage";
-import { Toaster } from "react-hot-toast";
 
 function App() {
   const router = createBrowserRouter([
