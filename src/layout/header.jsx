@@ -26,14 +26,14 @@ const Header = () => {
         </Link>
 
         <div className="flex md:order-2 items-center space-x-3 md:space-x-0 rtl:space-x-reverse">
-          <Link className="flex items-center justify-center ">
+          <Link to="/">
             <Search className="block py-2 px-1  text-white w-full h-full md:w-10 md:h-10 hover:bg-gray-100  md:hover:bg-transparent dark:text-white dark:hover:bg-gray-700 dark:hover:text-white justify-center " />
           </Link>
-          <Link className="flex items-center justify-center">
+          <Link to="/">
             <ShoppingCart className="block py-2 px-1 text-white w-full h-full md:w-10 md:h-10 hover:bg-gray-100  md:hover:bg-transparent  dark:text-white dark:hover:bg-gray-700 dark:hover:text-white justify-center " />
           </Link>
-          <Link className="flex items-center justify-center">
-            <CircleUserRound className="block py-2 px-1 text-white w-full h-full md:w-10 md:h-10 hover:bg-gray-100  md:hover:bg-transparent  dark:text-white dark:hover:bg-gray-700 dark:hover:text-white justify-center " />
+          <Link to="/">
+            <CircleUserRound className=" hidden md:block py-2 px-1 text-white w-full h-full md:w-10 md:h-10 hover:bg-gray-100  md:hover:bg-transparent  dark:text-white dark:hover:bg-gray-700 dark:hover:text-white justify-center " />
           </Link>
 
           <button
