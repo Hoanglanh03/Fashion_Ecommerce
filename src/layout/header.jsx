@@ -3,6 +3,7 @@ import Logo from "../asserts/images/logoHL.png";
 import { Link } from "react-router-dom";
 import { Search } from "lucide-react";
 import { ShoppingCart } from "lucide-react";
+import { CircleUserRound } from "lucide-react";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,17 +32,13 @@ const Header = () => {
           <Link className="flex items-center justify-center">
             <ShoppingCart className="block py-2 px-1 text-white w-full h-full md:w-10 md:h-10 hover:bg-gray-100  md:hover:bg-transparent  dark:text-white dark:hover:bg-gray-700 dark:hover:text-white justify-center " />
           </Link>
-
-          <button
-            type="button"
-            className="hidden md:block  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Log in
-          </button>
+          <Link className="flex items-center justify-center">
+            <CircleUserRound className="block py-2 px-1 text-white w-full h-full md:w-10 md:h-10 hover:bg-gray-100  md:hover:bg-transparent  dark:text-white dark:hover:bg-gray-700 dark:hover:text-white justify-center " />
+          </Link>
 
           <button
             onClick={toggleMenu}
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            className="inline-flex items center p-2 w-10 h-10 justify-center text-sm rounded-lg text-white md:hidden bg:blue-100 hover:bg-blue-600"
             aria-controls="navbar-sticky"
             aria-expanded={isOpen}
           >
@@ -69,11 +66,11 @@ const Header = () => {
           } w-full md:flex md:w-auto md:order-1`}
           id="navbar-sticky"
         >
-          <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-white-800 md:dark:bg-black dark:border-w-700">
+          <ul className="flex flex-col p-2 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50  md:space-x-1  rtl:space-x-reverse md:flex-row md:mt-0 md:border-0  dark:bg-white-800 md:dark:bg-black dark:border-w-700">
             <li>
               <Link
                 to="/"
-                className="block py-2 px-3 text-black rounded md:text-white md:hover:bg-transparent hover:bg-gray-700 md:hover:bg-gray-700 dark:hover:text-white"
+                className="block py-3 px-2 text-black rounded md:text-white md:hover:bg-transparent hover:bg-gray-700 md:hover:text-gray-300 "
                 aria-current="page"
               >
                 Home
@@ -81,40 +78,32 @@ const Header = () => {
             </li>
             <li>
               <Link
-                to="/women"
-                className="block py-2 px-3 text-black rounded md:text-white md:hover:bg-transparent hover:bg-gray-700 md:hover:bg-gray-700 dark:hover:text-white"
+                to="/shop"
+                className="block py-3 px-2 text-black rounded md:text-white md:hover:bg-transparent hover:bg-gray-700 md:hover:text-gray-300"
               >
                 Women
               </Link>
             </li>
             <li>
               <Link
-                to="/men"
-                className="block py-2 px-3 text-black rounded md:text-white md:hover:bg-transparent hover:bg-gray-700 md:hover:bg-gray-700 dark:hover:text-white"
+                to="/shop"
+                className="block py-3 px-2 text-black rounded md:text-white md:hover:bg-transparent hover:bg-gray-700 md:hover:text-gray-300"
               >
                 Men
               </Link>
             </li>
             <li>
               <Link
-                to="/jewelry"
-                className="block py-2 px-3 text-black rounded md:text-white md:hover:bg-transparent hover:bg-gray-700 md:hover:bg-gray-700 dark:hover:text-white"
+                to="/shop"
+                className="block py-3 px-2 text-black rounded md:text-white md:hover:bg-transparent hover:bg-gray-700 md:hover:text-gray-300"
               >
                 Jewelry
               </Link>
             </li>
             <li>
               <Link
-                to="/blog"
-                className="block py-2 px-3 text-black rounded md:text-white md:hover:bg-transparent hover:bg-gray-700 md:hover:bg-gray-700 dark:hover:text-white"
-              >
-                Blog
-              </Link>
-            </li>
-            <li>
-              <Link
                 to="/contact"
-                className="block py-2 px-3 text-black rounded md:text-white md:hover:bg-transparent hover:bg-gray-700 md:hover:bg-gray-700 dark:hover:text-white"
+                className="block py-3 px-2 text-black rounded md:text-white md:hover:bg-transparent hover:bg-gray-700 md:hover:text-gray-300"
               >
                 Contact
               </Link>
@@ -122,7 +111,7 @@ const Header = () => {
             <li>
               <Link
                 to="/login"
-                className="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:hover:text-blue-500 dark:text-black dark:hover:bg-gray-700 dark:hover:text-white"
+                className="block py-2 px-2 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:hover:text-blue-500 dark:text-black dark:hover:bg-gray-700 dark:hover:text-white"
               >
                 Login
               </Link>
