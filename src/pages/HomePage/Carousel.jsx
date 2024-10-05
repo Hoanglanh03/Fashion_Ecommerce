@@ -5,13 +5,14 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 const Carousel = () => {
-  const [selectedType, setSelectedType] = useState("men's clothing");
+  const [selectedCard, setSelectedCard] = useState("null");
+  const [categories, setCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const [data, setData] = useState([]);
   const [itemsPerPage, setItemsPerPage] = useState(4);
+  const [data, setData] = useState([]);
 
   const filteredProducts = data.filter(
-    (card) => card.category === selectedType
+    (card) => card.category === selectedCard
   );
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
 
@@ -31,6 +32,13 @@ const Carousel = () => {
         const response = await axios.get("https://fakestoreapi.com/products");
         if (response.status === 200) {
           setData(response.data);
+
+          const allCategories = [
+            ...new Set(response.data.map((ele) => ele.category)),
+          ];
+
+          setCategories(allCategories);
+          setSelectedCard(allCategories[0]);
         } else {
           toast.error("not contact with API");
         }
@@ -39,7 +47,6 @@ const Carousel = () => {
         alert("Error:", error);
       }
     };
-
     fetchData();
     updateItemsPerPage();
     window.addEventListener("resize", updateItemsPerPage);
@@ -49,24 +56,22 @@ const Carousel = () => {
 
   return (
     <div>
-      <div className="flex w-96 gap-2 m-auto align-center">
-        {["men's clothing", "women's clothing", "electronics", "jewelery"].map(
-          (type) => (
-            <button
-              key={type}
-              className={`text-xm bg-white hover:text-gray-500 ${
-                selectedType === type ? "text-black" : "text-gray-400"
-              }`}
-              onClick={() => {
-                console.log("Selected Type:", type);
-                setSelectedType(type);
-                setCurrentPage(0);
-              }}
-            >
-              {type}
-            </button>
-          )
-        )}
+      <div className="container flex justify-center gap-10 m-auto align-center">
+        {categories.map((item) => (
+          <button
+            key={item}
+            className={`text-xl bg-white hover:text-gray-500 ${
+              selectedCard === item ? "text-black" : "text-gray-400"
+            }`}
+            onClick={() => {
+              console.log("Selected item:", item);
+              setSelectedCard(item);
+              setCurrentPage(0);
+            }}
+          >
+            {item}
+          </button>
+        ))}
       </div>
 
       <div className="container flex justify-between mt-2 mb-1">
