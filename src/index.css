@@ -13,10 +13,8 @@
 }
 
 button {
-  width: 100%;
   font-size: 15px;
   font-weight: 600;
-  padding: 10px;
   margin: 5px 0;
   background-color: #007bff;
   color: white;
