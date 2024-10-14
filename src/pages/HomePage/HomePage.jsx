@@ -8,7 +8,7 @@ import Footer from "../../layout/footer";
 const HomePage = () => {
   return (
     <div className="homepage">
-      <Header />
+      <Header/>
       <HeroSection />
       <Advertisement />
       <Carousel />
