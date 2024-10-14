@@ -1,15 +1,30 @@
 import React, { useState } from "react";
 import Logo from "../asserts/images/logoHL.png";
+import toast from "react-hot-toast";
+
 import { Link } from "react-router-dom";
-import { Search } from "lucide-react";
-import { ShoppingCart } from "lucide-react";
-import { CircleUserRound } from "lucide-react";
+import { Search, ShoppingCart, CircleUserRound } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutSuccess } from "../../src/redux/action";
+import { stateLoginSelector } from "../redux/selector";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dispatch = useDispatch();
+  const stateLogin = useSelector(stateLoginSelector);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLogout = () => {
+    dispatch(logoutSuccess());
+    toast.success("Logged out successfully");
   };
 
   return (
@@ -32,9 +47,60 @@ const Header = () => {
           <Link to="/">
             <ShoppingCart className="block py-2 px-1 text-white w-full h-full md:w-10 md:h-10 hover:bg-gray-100  md:hover:bg-transparent  dark:text-white dark:hover:bg-gray-700 dark:hover:text-white justify-center " />
           </Link>
-          <Link to="/">
-            <CircleUserRound className=" hidden md:block py-2 px-1 text-white w-full h-full md:w-10 md:h-10 hover:bg-gray-100  md:hover:bg-transparent  dark:text-white dark:hover:bg-gray-700 dark:hover:text-white justify-center " />
-          </Link>
+
+          <div className="relative">
+            <button
+              id="dropdownUserAvatarButton"
+              onClick={toggleDropdown}
+              className="flex text-sm bg-black rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+              type="button"
+            >
+              <CircleUserRound className="hidden md:block py-2 px-1 text-white w-full h-full md:w-10 md:h-10 hover:bg-gray-100 md:hover:bg-transparent dark:text-white dark:hover:bg-gray-700 dark:hover:text-white justify-center" />
+            </button>
+
+            {isDropdownOpen && (
+              <div
+                id="dropdownAvatar"
+                className="z-10 absolute right-0 mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
+              >
+                <ul
+                  className="py-2 text-sm text-gray-700 dark:text-gray-200"
+                  aria-labelledby="dropdownUserAvatarButton"
+                >
+                  {stateLogin ? (
+                    <li>
+                      <Link
+                        to="/login"
+                        onClick={handleLogout}
+                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      >
+                        Logout
+                      </Link>
+                    </li>
+                  ) : (
+                    <>
+                      <li>
+                        <Link
+                          to="/login"
+                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Login
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/register"
+                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Register
+                        </Link>
+                      </li>
+                    </>
+                  )}
+                </ul>
+              </div>
+            )}
+          </div>
 
           <button
             onClick={toggleMenu}

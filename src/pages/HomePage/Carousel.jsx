@@ -39,6 +39,7 @@ const Carousel = () => {
 
           setCategories(allCategories);
           setSelectedCard(allCategories[0]);
+          
         } else {
           toast.error("not contact with API");
         }
