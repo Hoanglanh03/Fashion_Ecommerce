@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import img_1 from "../../asserts/images/ads.png";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { setLogin } from "../../redux/slices/authSlice";
+import { setLogin } from "../../redux/state";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const LoginPage = () => {
 
       if (response.status === 200) {
         toast.success("Login successfully");
-        dispatch(setLogin({ email, password }));
+        dispatch(setLogin({ email }));
         navigate("/");
       } else {
         toast.error("Login Unsuccessful!");
