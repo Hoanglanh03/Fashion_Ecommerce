@@ -8,7 +8,9 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import ProductPage from "./pages/ProductPage/ProductPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import ShopPage from "./pages/ShopPage/ShopPage";
-
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { loadUserFromLocalStorage } from "./redux/slices/authSlice";
 function App() {
   const router = createBrowserRouter([
     {
@@ -48,6 +50,12 @@ function App() {
     },
   ]);
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log("change");
+    dispatch(loadUserFromLocalStorage());
+  }, [dispatch]);
   return (
     <div>
       <Toaster />
