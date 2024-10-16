@@ -1,18 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Logo from "../asserts/images/logoHL.png";
 import toast from "react-hot-toast";
-
 import { Link } from "react-router-dom";
 import { Search, ShoppingCart, CircleUserRound } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutSuccess } from "../../src/redux/action";
-import { stateLoginSelector } from "../redux/selector";
+import { setLogout } from "../redux/state";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { email } = useSelector((state) => state);
   const dispatch = useDispatch();
-  const stateLogin = useSelector(stateLoginSelector);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -23,7 +21,7 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    dispatch(logoutSuccess());
+    dispatch(setLogout());
     toast.success("Logged out successfully");
   };
 
@@ -67,16 +65,26 @@ const Header = () => {
                   className="py-2 text-sm text-gray-700 dark:text-gray-200"
                   aria-labelledby="dropdownUserAvatarButton"
                 >
-                  {stateLogin ? (
-                    <li>
-                      <Link
-                        to="/login"
-                        onClick={handleLogout}
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Logout
-                      </Link>
-                    </li>
+                  {email ? (
+                    <>
+                      <li>
+                        <Link
+                          to="/"
+                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-xs"
+                        >
+                          {email}
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/login"
+                          onClick={handleLogout}
+                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Logout
+                        </Link>
+                      </li>
+                    </>
                   ) : (
                     <>
                       <li>
@@ -177,7 +185,7 @@ const Header = () => {
             <li>
               <Link
                 to="/login"
-                className="block py-2 px-2 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:hover:text-blue-500 dark:text-black dark:hover:bg-gray-700 dark:hover:text-white"
+                className="block md:hidden py-2 px-2 text-black rounded hover:bg-gray-100 md:hover:bg-transparent dark:text-black dark:hover:bg-gray-700 dark:hover:text-white"
               >
                 Login
               </Link>

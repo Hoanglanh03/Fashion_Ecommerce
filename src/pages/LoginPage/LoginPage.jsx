@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import img_1 from "../../asserts/images/ads.png";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { loginSuccess } from "../../redux/action";
+import { useDispatch } from "react-redux";
+import { setLogin } from "../../redux/state";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -25,13 +25,10 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const { email, password } = formData;
 
     try {
-      const loginData = {
-        email: formData.email,
-        password: formData.password,
-      };
-
+      const loginData = { email, password };
       const response = await axios.post(
         "https://fakestoreapi.com/users",
         loginData
@@ -39,9 +36,7 @@ const LoginPage = () => {
 
       if (response.status === 200) {
         toast.success("Login successfully");
-        dispatch(
-          loginSuccess({ email: formData.email, password: formData.password })
-        );
+        dispatch(setLogin({ email }));
         navigate("/");
       } else {
         toast.error("Login Unsuccessful!");
