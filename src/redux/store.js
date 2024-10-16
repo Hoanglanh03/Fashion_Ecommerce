@@ -1,9 +1,8 @@
-import { createStore } from "redux";
-import { composeWithDevTools } from "@redux-devtools/extension";
-import rootReducer from "./reducer";
+import { configureStore } from "@reduxjs/toolkit";
+import authReducer from "../redux/slices/authSlice";
 
-const composedEnhancers = composeWithDevTools();
-
-const store = createStore(rootReducer, composedEnhancers);
-
-export default store;
+export const store = configureStore({
+  reducer: {
+    auth: authReducer,
+  },
+});
