@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const Sidebar = ({
   categories,
@@ -8,12 +8,12 @@ const Sidebar = ({
   setSelectedPriceRange,
 }) => {
   return (
-    <div className="w-1/5 p-3 h-screen border-5 rounded-lg bg-gray-100">
+    <div className="w-68 p-3 h-screen border-5 rounded-lg bg-gray-100">
       <h1 className="text-2xl font-semibold mb-5 border-b-2">Store</h1>
       <section>
         <input
           type="text"
-          className="border-1 rounded-lg px-2 sm:mb-0  w-5 md:w-full h-10"
+          className="border-1 rounded-lg px-2  w-full h-10"
           placeholder="Search product"
           onChange={(e) => setSearchTerm(e.target.value)}
         />
