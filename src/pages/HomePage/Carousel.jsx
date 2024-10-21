@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Card from "../../components/Card";
 import axios from "axios";
 import toast from "react-hot-toast";
+import Card from "../../components/Card";
 
 const Carousel = () => {
   const [selectedCard, setSelectedCard] = useState("null");
@@ -39,7 +39,6 @@ const Carousel = () => {
 
           setCategories(allCategories);
           setSelectedCard(allCategories[0]);
-          
         } else {
           toast.error("not contact with API");
         }
