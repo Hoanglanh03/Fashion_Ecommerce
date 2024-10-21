@@ -1,14 +1,14 @@
 import React from "react";
-import Header from "../../layout/header";
+import Header from "../../components/header";
 import HeroSection from "./HeroSection";
 import Advertisement from "./Advertisement";
 import Carousel from "./Carousel";
-import Footer from "../../layout/footer";
+import Footer from "../../components/footer";
 
 const HomePage = () => {
   return (
     <div className="homepage">
-      <Header/>
+      <Header />
       <HeroSection />
       <Advertisement />
       <Carousel />
