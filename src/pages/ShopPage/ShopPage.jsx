@@ -57,7 +57,7 @@ const ShopPage = () => {
         </div>
       </div>
 
-      <div className="container md:w-full lg:w-full flex justify-between ">
+      <div className="container flex flex-col  sm:flex-row   lg:mx-auto lg:w-full  lg:p-4 md:p-4">
         <Sidebar
           categories={categories}
           selectedCard={selectedCard}

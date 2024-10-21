@@ -8,12 +8,12 @@ const Sidebar = ({
   setSelectedPriceRange,
 }) => {
   return (
-    <div className="w-68 p-3 h-screen border-5 rounded-lg bg-gray-100">
+    <div className="w-68 h-screen border-5 rounded-lg bg-gray-100 p-4 m-4">
       <h1 className="text-2xl font-semibold mb-5 border-b-2">Store</h1>
       <section>
         <input
           type="text"
-          className="border-1 rounded-lg px-2  w-full h-10"
+          className="border-1 rounded-lg px-2  w-full h-10  text-base lg:text-base"
           placeholder="Search product"
           onChange={(e) => setSearchTerm(e.target.value)}
         />
@@ -22,7 +22,7 @@ const Sidebar = ({
         </div>
 
         {categories.map((item) => (
-          <label key={item} className="block mb-1">
+          <label key={item} className="block mb-1 text-base lg:text-base">
             <input
               type="radio"
               name="category"
@@ -46,7 +46,7 @@ const Sidebar = ({
         </div>
 
         <div className="relative">
-          <label className="block mb-1">
+          <label className="block mb-1  text-base lg:text-base">
             <input
               type="radio"
               name="price"
