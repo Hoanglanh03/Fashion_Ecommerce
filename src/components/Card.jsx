@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Card = ({ image, title, price }) => {
   return (
-    <div class=" w-64 h-fit  bg-white border border-gray-200 rounded-[20px_20px_20px_20px] shadow dark:bg-white hover:drop-shadow-lg">
+    <div class=" lg:w-64 md:w-52 w-60 h-fit  bg-white border border-gray-200 rounded-[20px_20px_20px_20px] shadow dark:bg-white hover:drop-shadow-lg">
       <a href="#">
         <img
           className="h-[260px] w-full py-2 px-3  rounded-[20px_20px_0_0]"
