@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import Card from "../../components/Card";
 
@@ -22,11 +22,11 @@ const ProductGird = ({
   });
 
   return (
-    <div className="w-4/5 ml-5">
+    <div className="w-full ml-5">
       <h2 className="text-xl font-semibold  p-2 border-b-2">Show product</h2>
-      <div className="w-full flex flex-wrap align-middle text-center ">
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
         {filteredProducts.map((card) => (
-          <div key={card.id} className="w-full sm:w-1/2 md:w-1/3 mt-5">
+          <div key={card.id} className="w-32  ">
             <Link to={`/shop/${card.id}`}>
               <Card image={card.image} title={card.title} price={card.price} />
             </Link>
