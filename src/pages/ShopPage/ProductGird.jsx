@@ -22,13 +22,16 @@ const ProductGird = ({
   });
 
   return (
-    <div className="w-full p-4 md:p-0 lg:p-0">
+    <div className="w-full p-4 md:p-0 lg:p-0 ">
       <h2 className="text-xl font-semibold  p-2 border-b-2 mt-5">
         Show product
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 ">
+      <div className="flex flex-col sm:items-center md:flex-row md:flex-wrap gap-6">
         {filteredProducts.map((card) => (
-          <div key={card.id} className="mt-5">
+          <div
+            key={card.id}
+            className="mt-5 w-full sm:w-auto sm:max-w-xs flex justify-center"
+          >
             <Link to={`/shop/${card.id}`}>
               <Card image={card.image} title={card.title} price={card.price} />
             </Link>
