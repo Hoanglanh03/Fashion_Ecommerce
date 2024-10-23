@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Card from "../../components/Card";
 import axios from "axios";
 import toast from "react-hot-toast";
+import Card from "../../components/Card";
 
 const Carousel = () => {
   const [selectedCard, setSelectedCard] = useState("null");
@@ -39,7 +39,6 @@ const Carousel = () => {
 
           setCategories(allCategories);
           setSelectedCard(allCategories[0]);
-          
         } else {
           toast.error("not contact with API");
         }
@@ -57,11 +56,11 @@ const Carousel = () => {
 
   return (
     <div>
-      <div className="container flex justify-center gap-10 m-auto align-center">
+      <div className="container flex justify-center gap-10 mx-auto align-center">
         {categories.map((item) => (
           <button
             key={item}
-            className={`text-xl bg-white hover:text-gray-500 ${
+            className={`text-xs md:text-sm lg:text-lg  bg-white hover:text-gray-500 ${
               selectedCard === item ? "text-black" : "text-gray-400"
             }`}
             onClick={() => {
@@ -75,7 +74,7 @@ const Carousel = () => {
         ))}
       </div>
 
-      <div className="container flex justify-between mt-2 mb-1">
+      <div className="container flex justify-center gap-5 mt-5 mb-2 mx-auto ">
         {filteredProducts
           .slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage)
           .map((card) => (
