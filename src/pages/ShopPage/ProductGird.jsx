@@ -33,7 +33,12 @@ const ProductGird = ({
             className="mt-5 w-full sm:w-auto sm:max-w-xs flex justify-center"
           >
             <Link to={`/shop/${card.id}`}>
-              <Card image={card.image} title={card.title} price={card.price} />
+              <Card
+                image={card.image}
+                title={card.title}
+                price={card.price}
+                description={card.description}
+              />
             </Link>
           </div>
         ))}

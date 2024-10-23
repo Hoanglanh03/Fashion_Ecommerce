@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Command } from "lucide-react"; // Import icon
+import { Command } from "lucide-react";
 
 const Sidebar = ({
   categories,
   selectedCard,
   setSelectedCard,
   setSearchTerm,
-  setSelectedPriceRange, // Nhận props từ App
+  setSelectedPriceRange,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -22,11 +22,6 @@ const Sidebar = ({
         </button>
       )}
 
-      {/* <div
-        className={`fixed left-0 top-0 z-40 h-screen w-60 p-4 bg-gray-100 transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 ${
-          isOpen ? "translate-x-0" : "-translate-x-full" // Sidebar sẽ mở khi isOpen là true
-        }`}
-      > */}
       <div
         className={`${
           isOpen
