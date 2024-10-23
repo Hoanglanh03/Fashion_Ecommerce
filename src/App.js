@@ -27,7 +27,7 @@ function App() {
       errorElement: <ErrorNotFound />,
     },
     {
-      path: "/product",
+      path: "/shop/:id",
       element: <ProductPage />,
       errorElement: <ErrorNotFound />,
     },
