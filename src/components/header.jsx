@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Logo from "../asserts/images/logoHL.png";
-import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Search, ShoppingCart, CircleUserRound } from "lucide-react";
-import { useDispatch, useSelector } from "react-redux";
 import { setLogout } from "../redux/state";
+import toast from "react-hot-toast";
+import Logo from "../asserts/images/logoHL.png";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
