@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import toast from "react-hot-toast";
+import { Link, useParams } from "react-router-dom";
+import { fetchProductByCategory } from "../../redux/api/apiService";
 import Card from "../../components/Card";
 
 const Carousel = () => {
+  const { category } = useParams();
   const [selectedCard, setSelectedCard] = useState("null");
   const [categories, setCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
@@ -28,24 +28,13 @@ const Carousel = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await axios.get("https://fakestoreapi.com/products");
-        if (response.status === 200) {
-          setData(response.data);
+      const loadData = await fetchProductByCategory(category);
+      setData(loadData);
 
-          const allCategories = [
-            ...new Set(response.data.map((ele) => ele.category)),
-          ];
+      const allCategories = [...new Set(loadData.map((ele) => ele.category))];
 
-          setCategories(allCategories);
-          setSelectedCard(allCategories[0]);
-        } else {
-          toast.error("not contact with API");
-        }
-      } catch (error) {
-        console.error("Error occurred while fetching data:", error);
-        alert("Error:", error);
-      }
+      setCategories(allCategories);
+      setSelectedCard(allCategories[0]);
     };
     fetchData();
     updateItemsPerPage();
