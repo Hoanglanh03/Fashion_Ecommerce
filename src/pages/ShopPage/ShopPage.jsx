@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Command } from "lucide-react";
-import axios from "axios";
-import toast from "react-hot-toast";
+import { fetchProductALL } from "../../redux/api/apiService";
+import { setProducts } from "../../redux/state";
+import { useDispatch } from "react-redux";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
 import Card from "../../components/Card";
@@ -15,30 +16,21 @@ const ShopPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedPriceRange, setSelectedPriceRange] = useState([0, 1000]);
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await axios.get("https://fakestoreapi.com/products");
-        if (response.status === 200) {
-          setData(response.data);
+      const response = await fetchProductALL();
+      dispatch(setProducts({ products: response }));
 
-          const allCategories = [
-            ...new Set(response.data.map((ele) => ele.category)),
-          ];
+      setData(response);
+      const allCategories = [...new Set(response.map((ele) => ele.category))];
 
-          setCategories(allCategories);
-          setSelectedCard(allCategories[0]);
-        } else {
-          toast.error("Not contact with API");
-        }
-      } catch (error) {
-        console.error("Error occurred while fetching data:", error);
-        alert("Error:", error);
-      }
+      setCategories(allCategories);
+      setSelectedCard(allCategories[0]);
     };
     fetchData();
-  }, []);
+  }, [dispatch]);
 
   const filteredProducts = data.filter((card) => {
     const matchesCategory = card.category === selectedCard;
