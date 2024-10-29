@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchProductById, fetchProductALL } from "../../redux/api/apiService";
+import { useSelector } from "react-redux";
+import { fetchProductById } from "../../redux/api/apiService";
 import { Heart, BaggageClaim } from "lucide-react";
 import Header from "../../components/header";
 import Card from "../../components/Card";
@@ -9,7 +9,6 @@ import Footer from "../../components/footer";
 
 const ProductPage = () => {
   const { id } = useParams();
-  const dispatch = useDispatch();
 
   const products = useSelector((state) => state.products);
 
@@ -21,22 +20,18 @@ const ProductPage = () => {
   const [itemsPerPage, setItemsPerPage] = useState(1);
 
   useEffect(() => {
-    dispatch(fetchProductALL());
-
     const loadProductData = async () => {
       const productData = await fetchProductById(id);
       setProductID(productData);
 
-      if (productData) {
-        const relatedProductData = products.filter(
-          (item) =>
-            item.category === productData.category && item.id !== parseInt(id)
-        );
-        setRelatedProducts(relatedProductData);
-      }
+      const relatedProductData = products.filter(
+        (item) =>
+          item.category === productData.category && item.id !== parseInt(id)
+      );
+      setRelatedProducts(relatedProductData);
     };
     loadProductData();
-  }, [id, dispatch]);
+  }, [id]);
 
   useEffect(() => {
     const updateItemsPerPage = () => {
