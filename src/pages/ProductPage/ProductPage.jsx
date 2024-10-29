@@ -1,36 +1,42 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProductById, fetchProductALL } from "../../redux/api/apiService";
 import { Heart, BaggageClaim } from "lucide-react";
 import Header from "../../components/header";
 import Card from "../../components/Card";
-import { fetchProductById, fetchProductALL } from "../../api/apiService";
 import Footer from "../../components/footer";
 
 const ProductPage = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState();
+  const dispatch = useDispatch();
+
+  const products = useSelector((state) => state.products);
+
+  const [productID, setProductID] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
+
   const [quantity, setQuantity] = useState(1);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(1); // Default number of products to display
+  const [itemsPerPage, setItemsPerPage] = useState(1);
 
   useEffect(() => {
-    const loadProductData = async () => {
-      try {
-        const productData = await fetchProductById(id);
-        setProduct(productData);
+    dispatch(fetchProductALL());
 
-        const relatedProductsData = await fetchProductALL(productData.category);
-        setRelatedProducts(
-          relatedProductsData.filter((item) => item.id !== parseInt(id))
+    const loadProductData = async () => {
+      const productData = await fetchProductById(id);
+      setProductID(productData);
+
+      if (productData) {
+        const relatedProductData = products.filter(
+          (item) =>
+            item.category === productData.category && item.id !== parseInt(id)
         );
-      } catch (error) {
-        console.error("Error loading product and related data:", error);
+        setRelatedProducts(relatedProductData);
       }
     };
-
     loadProductData();
-  }, [id]);
+  }, [id, dispatch]);
 
   useEffect(() => {
     const updateItemsPerPage = () => {
@@ -74,7 +80,7 @@ const ProductPage = () => {
     }
   };
 
-  if (!product) {
+  if (!productID) {
     return <div>Loading...</div>;
   }
 
@@ -86,22 +92,22 @@ const ProductPage = () => {
           <div className="shrink-0 max-w-md lg:max-w-lg mx-auto">
             <img
               className="w-60 md:w-72 lg:w-96 dark:block rounded-md mx-auto"
-              src={product.image}
-              alt={product.title}
+              src={productID.image}
+              alt={productID.title}
             />
           </div>
 
           <div className="mt-6 sm:mt-8 lg:mt-0">
             <h1 className="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-black">
-              {product.title}
+              {productID.title}
             </h1>
             <div className="mt-4 sm:items-center sm:gap-4 sm:flex">
               <p className="text-2xl font-extrabold text-gray-900 sm:text-3xl dark:text-black">
-                {product.price} $
+                {productID.price} $
               </p>
             </div>
 
-            <div className="flex w-2/5 justify-between gap-4 mt-4 border">
+            <div className="flex w-2/6 justify-between gap-4 mt-4 border mb-4">
               <button
                 onClick={decreaseQuantity}
                 className="dark:bg-white w-1/4 h-9 text-black my-0 border-current"
@@ -117,10 +123,10 @@ const ProductPage = () => {
               </button>
             </div>
 
-            <div className="sm:gap-4 sm:items-center sm:flex sm:mt-6 b">
+            <div className="sm:gap-4 sm:items-center sm:flex  ">
               <Link
                 to="/#"
-                className="flex gap-1 items-center justify-center py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                className="flex gap-1  items-center justify-center py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
               >
                 <Heart />
                 Add to favorites
@@ -128,7 +134,7 @@ const ProductPage = () => {
 
               <Link
                 to="/#"
-                className="text-black gap-2 mt-4 sm:mt-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 flex items-center justify-center"
+                className="text-black gap-2 mt-4 sm:mt-0 bg-primary-700 border hover:bg-orange-400 hover:text-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 flex items-center justify-center"
               >
                 <BaggageClaim />
                 Add to cart
@@ -137,7 +143,7 @@ const ProductPage = () => {
 
             <hr className="my-6 md:my-4 border-gray-200 dark:border-gray-400" />
             <p className="text-gray-500 dark:text-gray-400 ">
-              {product.description}
+              {productID.description}
             </p>
           </div>
         </div>
@@ -152,12 +158,14 @@ const ProductPage = () => {
           {relatedProducts
             .slice(currentIndex, currentIndex + itemsPerPage)
             .map((card) => (
-              <div className="w-full flex justify-center" key={card.id}>
-                <Card
-                  image={card.image}
-                  title={card.title}
-                  price={card.price}
-                />
+              <div key={card.id} className="w-full flex justify-center">
+                <Link to={`/shop/${card.id}`}>
+                  <Card
+                    image={card.image}
+                    title={card.title}
+                    price={card.price}
+                  />
+                </Link>
               </div>
             ))}
         </div>
