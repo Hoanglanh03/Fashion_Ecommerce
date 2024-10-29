@@ -1,5 +1,4 @@
 import axios from "axios";
-
 import { setProducts } from "../state";
 
 export const fetchProductById = async (id) => {
