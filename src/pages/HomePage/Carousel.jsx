@@ -1,20 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { fetchProductByCategory } from "../../redux/api/apiService";
+import { fetchProductALL } from "../../api/apiService";
 import Card from "../../components/Card";
 
 const Carousel = () => {
-  const { category } = useParams();
   const [selectedCard, setSelectedCard] = useState("null");
   const [categories, setCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(4);
   const [data, setData] = useState([]);
-
-  const filteredProducts = data.filter(
-    (card) => card.category === selectedCard
-  );
-  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
 
   const updateItemsPerPage = () => {
     if (window.innerWidth < 640) {
@@ -26,12 +20,18 @@ const Carousel = () => {
     }
   };
 
+  const filteredProducts = data.filter(
+    (card) => card.category === selectedCard
+  );
+
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+
   useEffect(() => {
     const fetchData = async () => {
-      const loadData = await fetchProductByCategory(category);
-      setData(loadData);
+      const response = await fetchProductALL();
+      setData(response);
 
-      const allCategories = [...new Set(loadData.map((ele) => ele.category))];
+      const allCategories = [...new Set(response.map((ele) => ele.category))];
 
       setCategories(allCategories);
       setSelectedCard(allCategories[0]);
