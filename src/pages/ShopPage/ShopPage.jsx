@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Command } from "lucide-react";
-import { fetchProductALL } from "../../redux/api/apiService";
+import { fetchProductALL } from "../../api/apiService";
 import { setProducts } from "../../redux/state";
 import { useDispatch } from "react-redux";
 import Header from "../../components/header";
