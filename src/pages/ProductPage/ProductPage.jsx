@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { fetchProductById } from "../../redux/api/apiService";
+import { fetchProductById } from "../../api/apiService";
 import { Heart, BaggageClaim } from "lucide-react";
 import Header from "../../components/header";
 import Card from "../../components/Card";
@@ -9,7 +9,6 @@ import Footer from "../../components/footer";
 
 const ProductPage = () => {
   const { id } = useParams();
-
   const products = useSelector((state) => state.products);
 
   const [productID, setProductID] = useState(null);
