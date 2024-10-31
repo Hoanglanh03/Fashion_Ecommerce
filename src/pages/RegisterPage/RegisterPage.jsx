@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
-import img_1 from "../../asserts/images/ads.png";
 import axios from "axios";
+import img_1 from "../../asserts/images/ads.png";
 
 const RegisterPage = () => {
   const [errors, setErrors] = useState({});

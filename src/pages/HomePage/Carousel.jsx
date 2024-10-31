@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import toast from "react-hot-toast";
+import { Link, useParams } from "react-router-dom";
+import { fetchProductALL } from "../../api/apiService";
 import Card from "../../components/Card";
 
 const Carousel = () => {
@@ -10,11 +9,6 @@ const Carousel = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(4);
   const [data, setData] = useState([]);
-
-  const filteredProducts = data.filter(
-    (card) => card.category === selectedCard
-  );
-  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
 
   const updateItemsPerPage = () => {
     if (window.innerWidth < 640) {
@@ -26,26 +20,21 @@ const Carousel = () => {
     }
   };
 
+  const filteredProducts = data.filter(
+    (card) => card.category === selectedCard
+  );
+
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await axios.get("https://fakestoreapi.com/products");
-        if (response.status === 200) {
-          setData(response.data);
+      const response = await fetchProductALL();
+      setData(response);
 
-          const allCategories = [
-            ...new Set(response.data.map((ele) => ele.category)),
-          ];
+      const allCategories = [...new Set(response.map((ele) => ele.category))];
 
-          setCategories(allCategories);
-          setSelectedCard(allCategories[0]);
-        } else {
-          toast.error("not contact with API");
-        }
-      } catch (error) {
-        console.error("Error occurred while fetching data:", error);
-        alert("Error:", error);
-      }
+      setCategories(allCategories);
+      setSelectedCard(allCategories[0]);
     };
     fetchData();
     updateItemsPerPage();
