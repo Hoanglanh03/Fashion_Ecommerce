@@ -10,6 +10,12 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { email } = useSelector((state) => state);
+  const cartItems = useSelector((state) => state.cart);
+  const totalItems = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
   const dispatch = useDispatch();
 
   const toggleDropdown = () => {
@@ -38,14 +44,18 @@ const Header = () => {
           </span>
         </Link>
 
-        <div className="flex md:order-2 items-center space-x-3 md:space-x-0 rtl:space-x-reverse">
+        <div className="flex md:order-2 items-center space-x-4 md:space-x-4 rtl:space-x-reverse ">
           <Link to="/">
             <Search className="block py-2 px-1  text-white w-full h-full md:w-10 md:h-10 hover:bg-gray-100  md:hover:bg-transparent dark:text-white dark:hover:bg-gray-700 dark:hover:text-white justify-center " />
           </Link>
-          <Link to="/">
-            <ShoppingCart className="block py-2 px-1 text-white w-full h-full md:w-10 md:h-10 hover:bg-gray-100  md:hover:bg-transparent  dark:text-white dark:hover:bg-gray-700 dark:hover:text-white justify-center " />
-          </Link>
-
+          <div className="relative ">
+            <span className="text-white text-xs p-1 bg-orange-400 rounded-2xl absolute left-6">
+              {totalItems}
+            </span>
+            <Link to="/cart">
+              <ShoppingCart className="block py-2 px-1 text-white w-full h-full md:w-10 md:h-10 hover:bg-gray-100  md:hover:bg-transparent  dark:text-white dark:hover:bg-gray-700 dark:hover:text-white justify-center " />
+            </Link>
+          </div>
           <div className="relative">
             <button
               id="dropdownUserAvatarButton"
