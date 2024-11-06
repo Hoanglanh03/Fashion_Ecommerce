@@ -46,6 +46,11 @@ function App() {
       element: <CheckoutPage />,
       errorElement: <ErrorNotFound />,
     },
+    {
+      path: "/cart",
+      element: <CheckoutPage />,
+      errorElement: <ErrorNotFound />,
+    },
   ]);
 
   return (
