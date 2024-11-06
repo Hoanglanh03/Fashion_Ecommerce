@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchProductById } from "../../api/apiService";
 import { Heart, BaggageClaim } from "lucide-react";
+import { addToCart } from "../../redux/state";
+import toast from "react-hot-toast";
 import Header from "../../components/header";
 import Card from "../../components/Card";
 import Footer from "../../components/footer";
@@ -10,6 +12,7 @@ import Footer from "../../components/footer";
 const ProductPage = () => {
   const { id } = useParams();
   const products = useSelector((state) => state.products);
+  const dispatch = useDispatch();
 
   const [productID, setProductID] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
@@ -74,6 +77,14 @@ const ProductPage = () => {
     }
   };
 
+  const handleAddToCart = () => {
+    if (productID) {
+      const productToAdd = { ...productID, quantity };
+      dispatch(addToCart(productToAdd));
+      toast.success("Product added to cart!");
+    }
+  };
+
   if (!productID) {
     return <div>Loading...</div>;
   }
@@ -126,13 +137,13 @@ const ProductPage = () => {
                 Add to favorites
               </Link>
 
-              <Link
-                to="/#"
-                className="text-black gap-2 mt-4 sm:mt-0 bg-primary-700 border hover:bg-orange-400 hover:text-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 flex items-center justify-center"
+              <button
+                onClick={handleAddToCart}
+                className="bg-white text-black gap-2 mt-4 sm:mt-0 bg-primary-700 border hover:bg-orange-400 hover:text-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 flex items-center justify-center"
               >
                 <BaggageClaim />
                 Add to cart
-              </Link>
+              </button>
             </div>
 
             <hr className="my-6 md:my-4 border-gray-200 dark:border-gray-400" />
@@ -155,6 +166,7 @@ const ProductPage = () => {
               <div key={card.id} className="w-full flex justify-center">
                 <Link to={`/shop/${card.id}`}>
                   <Card
+                    id={card.id}
                     image={card.image}
                     title={card.title}
                     price={card.price}
