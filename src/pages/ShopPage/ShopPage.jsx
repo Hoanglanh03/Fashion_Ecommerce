@@ -174,6 +174,7 @@ const ShopPage = () => {
               >
                 <Link to={`/shop/${card.id}`}>
                   <Card
+                    id={card.id}
                     image={card.image}
                     title={card.title}
                     price={card.price}
