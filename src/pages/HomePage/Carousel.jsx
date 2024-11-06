@@ -70,6 +70,7 @@ const Carousel = () => {
             <div key={card.id} className="no-underline">
               <Link to={`/shop/${card.id}`}>
                 <Card
+                  id={card.id}
                   image={card.image}
                   title={card.title}
                   price={card.price}
